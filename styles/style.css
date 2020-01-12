@@ -7,7 +7,7 @@ body { margin: 0; background: bisque; font-family: sans-serif; }
 #welcome h1 {
     font-size: 2.0em;
     margin: 0;
-    margin-top: 2%;
+    /* margin-top: 2%; */
 }
 
 #welcome h1:hover {
@@ -21,7 +21,7 @@ body { margin: 0; background: bisque; font-family: sans-serif; }
 
 #welcome small {
     font-size: 20px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
 }
 
 #zombies {
@@ -71,14 +71,35 @@ body { margin: 0; background: bisque; font-family: sans-serif; }
 #begin_button {
     margin-top: 10%;
     padding: 1em;
-    color: black;
+    color: white;
     background-color: orange;
     font-size: 20px;
-    box-shadow: 2px 2px 5px gray;
+    box-shadow: 1.5px 1.5px 3px lightgray;
     font-weight: bold;
     outline: none;
-    border: 1px solid black;
-    transition: background-color 2s;
+    border: none;
+    transition: all .4s;
+    border-radius: 5px;
+}
+
+#retry-buttton {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+#retry-buttton button {
+    color: white;
+    background-color: red;
+    box-shadow: 2px 2px 5px #fff;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#retry_button_button:hover {
+    background-color: rgba(255, 0, 0, 0.664);
+    cursor: pointer;
 }
 
 #begin_button:hover {

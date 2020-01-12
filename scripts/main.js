@@ -6,6 +6,9 @@ var timer_parent = document.getElementsByClassName('timer')[0]
 var top_text = document.getElementById('top_text')
 var time = document.getElementById('time')
 var whacked_text = document.getElementsByClassName('whacked')[0];
+
+var retry_button = document.getElementById('retry_button_button');
+
 var img_global;
 
 var curr_idx = 0
@@ -13,6 +16,7 @@ var curr_idx = 0
 const whacked_event = () => {
     whacked++
     whacked_text.innerText = whacked
+    playAudio()
 }
 
 var count_interval, traverse_interval;
@@ -38,6 +42,12 @@ if (whack_button != null) {
     })
 }
 
+if (retry_button != null) {
+    retry_button.addEventListener('click', () => {
+        begin();
+    })
+}
+
 function _whack() {
     path = document.getElementById('z-selected').children[0].getAttribute('src')
     storage.setItem('path', path)
@@ -55,10 +65,15 @@ function setSelected(index) {
 }
 
 function begin() {
+
+    secs != 30 ? secs = 30 : // 
+
     top_text.innerText = 'Whack a Zombie!!!'
     begin_button.classList.add('d-none')
     play_section.style.display = 'grid'
     timer_parent.classList.remove('d-none')
+
+    retry_button.classList.add('d-none')
 
     path = storage.getItem('path')
     document.getElementsByClassName('whacked-timer')[0].style.display = "block"
@@ -79,12 +94,30 @@ var count = () => {
     }
 
     if (secs === 0) { 
-        clearInterval(count_interval)
-        clearInterval(traverse_interval)
-        play_section.style.display = 'none'
-        begin_button.style.display = 'block'
+        time.style.color = 'black'
+        time.innerText = 'oops!'
+        finishSession()
      }
 };
+
+function finishSession() { 
+    clearInterval(count_interval)
+    clearInterval(traverse_interval)
+
+    let last_box = document.getElementsByClassName('box')[curr_idx];
+
+    last_box.removeChild(last_box.childNodes[0])
+
+    curr_idx = 0
+    play_section.style.display = 'none'
+    top_text.innerText = 'Game Over!'
+
+    document.getElementById('complete_whacked_text')
+        .innerText = 'You whacked ' + whacked + ' zombies'
+    document.getElementsByClassName('whacked')[0].style.display = 'none';
+
+    retry_button.classList.remove('d-none')
+}
 
 var traverse = () => {
 
@@ -108,7 +141,12 @@ function beginTraversal() {
     img_global.classList.add('box-zombie')
     img_global.setAttribute('src', path)
 
-    traverse_interval = setInterval(traverse, 450)
+    traverse_interval = setInterval(traverse, 1000)
+}
+
+function playAudio() {
+    var audio = new Audio('../tunes/buzz.mp3')
+    audio.play()
 }
 
 

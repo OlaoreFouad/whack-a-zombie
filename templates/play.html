@@ -10,12 +10,17 @@
     <section id="welcome">
         <h1 id="top_text">Play!</h1>
         <button type="button" id="begin_button" onclick="begin()">Begin</button>
+        <div id="retry-buttton">
+            <button type="button"
+                class="d-none"
+                id="retry_button_button">Retry</button>
+        </div>
     </section>
 
     <div class="timer d-none">
         <span>Time: </span><span id="time">30s</span>
     </div>
-    <div class="whacked-timer d-none"><span>Whacked: </span> <span class="whacked">0</span></div>
+    <div class="whacked-timer d-none"><span id="complete_whacked_text">Whacked: </span> <span class="whacked">0</span></div>
 
     <section id="play">
         <div class="box"></div>
